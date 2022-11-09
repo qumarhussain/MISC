@@ -1,0 +1,3 @@
+input_dir=input_dir/
+staging_dir=staging_dir
+file_pattern=*.dat
