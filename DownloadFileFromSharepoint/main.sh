@@ -51,6 +51,10 @@ then
     exit
 fi
 
+echo "processing files"
+
 files=$(python files.py "$files_response" $file_pattern $staging_dir)
 
-$(cd $staging_dir && find . -type f -size +10k -exec split -b 10K {} {}_ \; -exec rm {} \; && cd $OLDPWD)
+echo -e "$files"
+
+echo "$(cd $staging_dir && find . -type f -size +3M -exec split -b 3M -printf "Splitted file: %f\n" {} {}_ \; -exec rm {} \; && cd $OLDPWD)"

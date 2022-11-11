@@ -1,6 +1,6 @@
 import sys
 import json
-from subprocess import call
+from subprocess import check_output 
 import os
 
 try:
@@ -12,9 +12,9 @@ try:
         if "value" in obj:
             files = obj["value"]
             for file in files:
-                print(os.path.splitext(file["name"]))[1]
                 if os.path.splitext(file["name"])[1] == sys.argv[2]:
-                    call(["./process_file.sh", file["@microsoft.graph.downloadUrl"], file["name"], sys.argv[3]])
+                    out = check_output(["./process_file.sh", file["@microsoft.graph.downloadUrl"], file["name"], sys.argv[3]])
+                    print(out)
         else:
             sys.exit("Error while processing {0}. Response: {1}".format(sys.argv[2], obj))
 except ValueError:
